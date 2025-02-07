@@ -32,7 +32,7 @@ void Server::onNewConnection()
     qDebug() << "New client connected!";
 }
 
-void Server::onReadyRead() const
+void Server::onReadyRead()
 {
     const QByteArray data = _client.socket->readAll();
     const QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -42,9 +42,9 @@ void Server::onReadyRead() const
     const QString sender = json["sender"].toString();
     const QString receiver = json["receiver"].toString();
 
-    qDebug() << "Message from:" << sender << "to:" << receiver;
+    if (_client.name.isEmpty() && !sender.isEmpty())
+        _client.name = sender;
+    qDebug() << "Message from:" << _client.name << "to:" << receiver;
     qDebug() << "Text:" << text;
 
-    // if (clientData.name.isEmpty() && !sender.isEmpty())
-    //     clientData.name = sender;
 }

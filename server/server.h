@@ -22,7 +22,7 @@ private:
     void setupConnections();
 
     void onNewConnection();
-    void onReadyRead() const;
+    void onReadyRead();
 
 private:
     ClientData _client;

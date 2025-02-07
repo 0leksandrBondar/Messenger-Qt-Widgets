@@ -11,14 +11,6 @@ void Client::connectToServer(const QString& ip, const quint16 port) const
     _socket->connectToHost(ip, port);
 }
 
-void Client::sendMessage(const QByteArray& data) const
-{
-    PackageData packageData;
-
-    _socket->write(data);
-    _socket->flush();
-}
-
 void Client::sendMessage(const QString& message, const QString& filePath) const
 {
     if (_socket->state() != QAbstractSocket::ConnectedState)

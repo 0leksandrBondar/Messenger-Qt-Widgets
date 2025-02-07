@@ -12,8 +12,7 @@ public:
 
     void connectToServer(const QString& ip, const quint16 port) const;
 
-    void sendMessage(const QByteArray& data) const;
-    void sendMessage(const QString& message, const QString& filePath) const;
+    void sendMessage(const QString& message = QString(), const QString& filePath = QString()) const;
 
     void setUserName(const QString& userName) { _userName = userName; }
     void setReceiverName(const QString& receiver) { _receiver = receiver; }

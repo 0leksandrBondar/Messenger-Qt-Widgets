@@ -22,6 +22,7 @@ void WelcomeWidget::onLoginButtonClicked()
         return;
 
     _client->setUserName(_nameInputLine->text());
+    _client->sendMessage();
 
     emit loginButtonClicked();
 }
