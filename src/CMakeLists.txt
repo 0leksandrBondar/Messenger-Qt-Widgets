@@ -11,7 +11,9 @@ set(Source
         mainwindow.cpp
 
         client/clientwidget.h
+        client/welcomewidget.h
         client/clientwidget.cpp
+        client/welcomewidget.cpp
 
         client/ChatViewWidget/chatviewwidget.h
         client/ChatListWidget/chatlistwidget.h

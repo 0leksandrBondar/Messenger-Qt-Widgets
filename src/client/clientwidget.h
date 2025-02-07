@@ -12,7 +12,7 @@ class ClientWidget final : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ClientWidget(QWidget* parent = nullptr);
+    explicit ClientWidget(Client* client, QWidget* parent = nullptr);
 
 private:
     void setupUi();

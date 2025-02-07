@@ -2,10 +2,7 @@
 
 #include <QTcpSocket>
 
-Client::Client(QObject* parent) : QObject(parent), _socket{ new QTcpSocket() }
-{
-    setupConnections();
-}
+Client::Client(QObject* parent) : QObject(parent), _socket{ new QTcpSocket } { setupConnections(); }
 
 void Client::connectToServer(const QString& ip, const quint16 port) const
 {

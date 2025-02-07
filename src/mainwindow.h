@@ -1,18 +1,25 @@
 #pragma once
 
-#include "client/clientwidget.h"
-
 #include <QMainWindow>
+
+class Client;
+class ClientWidget;
+class WelcomeWidget;
 
 class MainWindow final : public QMainWindow
 {
+    Q_OBJECT
 public:
-    MainWindow();
-    MainWindow(const MainWindow&) = delete;
-    MainWindow(MainWindow&&) = delete;
-    MainWindow& operator=(const MainWindow&) = delete;
-    MainWindow& operator=(MainWindow&&) = delete;
+    explicit MainWindow(QWidget* parent = nullptr);
+
+    void onLoginButtonClicked();
 
 private:
+    void setupUi();
+    void setupConnections();
+
+private:
+    Client* _client{ nullptr };
     ClientWidget* _clientWidget{ nullptr };
+    WelcomeWidget* _welcomeWidget{ nullptr };
 };

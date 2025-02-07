@@ -7,16 +7,15 @@
 #include <QSplitter>
 #include <QVBoxLayout>
 
-ClientWidget::ClientWidget(QWidget* parent)
+ClientWidget::ClientWidget(Client* client, QWidget* parent)
     : QWidget(parent),
-      _client{ new Client() },
+      _client{ client },
       _splitter{ new QSplitter() },
       _chatListWidget{ new ChatListWidget() },
       _chatViewWidget{ new ChatViewWidget() }
 {
     setupUi();
     setupConnections();
-    _client->connectToServer("127.0.0.1", 1234);
 }
 
 void ClientWidget::setupUi()
@@ -35,7 +34,7 @@ void ClientWidget::setupConnections()
 {
     connect(_splitter, &QSplitter::splitterMoved, _chatListWidget,
             &ChatListWidget::onSplitterResized);
-    connect(_chatViewWidget, &ChatViewWidget::sendMessage, _client, &Client::sendMessage);
+     connect(_chatViewWidget, &ChatViewWidget::sendMessage, _client, &Client::sendMessage);
 }
 
 void ClientWidget::setupSplitter() const
