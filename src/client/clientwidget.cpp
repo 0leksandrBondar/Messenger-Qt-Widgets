@@ -11,8 +11,8 @@ ClientWidget::ClientWidget(Client* client, QWidget* parent)
     : QWidget(parent),
       _client{ client },
       _splitter{ new QSplitter() },
-      _chatListWidget{ new ChatListWidget() },
-      _chatViewWidget{ new ChatViewWidget() }
+      _chatListWidget{ new ChatListWidget(_client) },
+      _chatViewWidget{ new ChatViewWidget(_client) }
 {
     setupUi();
     setupConnections();
@@ -34,7 +34,6 @@ void ClientWidget::setupConnections()
 {
     connect(_splitter, &QSplitter::splitterMoved, _chatListWidget,
             &ChatListWidget::onSplitterResized);
-     connect(_chatViewWidget, &ChatViewWidget::sendMessage, _client, &Client::sendMessage);
 }
 
 void ClientWidget::setupSplitter() const

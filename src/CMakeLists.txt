@@ -33,6 +33,9 @@ set(Source
 
         client/ClientNetwork/client.h
         client/ClientNetwork/client.cpp
+
+        client/ClientNetwork/package/jsonpackage.h
+        client/ClientNetwork/package/jsonpackage.cpp
 )
 
 find_package(Qt6 COMPONENTS Core Widgets Network Gui REQUIRED)

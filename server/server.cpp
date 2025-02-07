@@ -1,10 +1,13 @@
 #include "server.h"
 
+#include "../src/client/ClientNetwork/client.h"
+
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QTcpServer>
 #include <QTcpSocket>
 
-Server::Server(QObject* parent)
-    : QObject(parent), _server{ new QTcpServer }, _clientSocket{ new QTcpSocket }
+Server::Server(QObject* parent) : QObject(parent), _server{ new QTcpServer }
 {
     setupConnections();
     if (_server->listen(QHostAddress::Any, 1234))
@@ -20,18 +23,28 @@ void Server::setupConnections()
 
 void Server::onNewConnection()
 {
-    _clientSocket = _server->nextPendingConnection();
-    connect(_clientSocket, &QTcpSocket::readyRead, this, &Server::onReadyRead);
-    _clientSockets.push_back(_clientSocket);
+    ClientData client;
+    client.socket = _server->nextPendingConnection();
+    connect(client.socket, &QTcpSocket::readyRead, this, &Server::onReadyRead);
+    _clients.push_back(client);
+    _client = client;
+
     qDebug() << "New client connected!";
 }
 
 void Server::onReadyRead() const
 {
-    if (!_clientSocket)
-        return;
+    const QByteArray data = _client.socket->readAll();
+    const QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QJsonObject json = doc.object();
 
-    const QByteArray data = _clientSocket->readAll();
-    const QString message = QString::fromUtf8(data);
-    qDebug() << "Received message from client:" << message;
+    const QString text = json["text"].toString();
+    const QString sender = json["sender"].toString();
+    const QString receiver = json["receiver"].toString();
+
+    qDebug() << "Message from:" << sender << "to:" << receiver;
+    qDebug() << "Text:" << text;
+
+    // if (clientData.name.isEmpty() && !sender.isEmpty())
+    //     clientData.name = sender;
 }

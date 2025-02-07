@@ -5,6 +5,12 @@
 class QTcpSocket;
 class QTcpServer;
 
+struct ClientData
+{
+    QString name;
+    QTcpSocket* socket;
+};
+
 class Server final : public QObject
 {
     Q_OBJECT
@@ -19,7 +25,7 @@ private:
     void onReadyRead() const;
 
 private:
+    ClientData _client;
     QTcpServer* _server{ nullptr };
-    QTcpSocket* _clientSocket{ nullptr };
-    std::vector<QTcpSocket*> _clientSockets;
+    std::vector<ClientData> _clients;
 };

@@ -1,18 +1,26 @@
 #include "chatlistwidget.h"
+#include "../ClientNetwork/client.h"
 
 #include <QLineEdit>
 #include <QListWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 
-ChatListWidget::ChatListWidget(QWidget* parent)
+ChatListWidget::ChatListWidget(Client* client, QWidget* parent)
     : QWidget(parent),
+      _client{ client },
       _searchLine{ new QLineEdit() },
       _addChatButton{ new QPushButton(QStringLiteral("New")) },
       _chatListWidget{ new QListWidget() }
 {
     setupUi();
     setupConnections();
+}
+
+void ChatListWidget::onChatSelectionChanged() const
+{
+    if (const QListWidgetItem* selectedItem = _chatListWidget->currentItem())
+        _client->setReceiverName(selectedItem->text());
 }
 
 void ChatListWidget::onAddChatButtonClicked() const
@@ -52,6 +60,8 @@ void ChatListWidget::setupUi()
 void ChatListWidget::setupConnections()
 {
     connect(_addChatButton, &QPushButton::clicked, this, &ChatListWidget::onAddChatButtonClicked);
+    connect(_chatListWidget, &QListWidget::itemSelectionChanged, this,
+            &ChatListWidget::onChatSelectionChanged);
 }
 
 void ChatListWidget::createChat(const QString& chatName) const
@@ -61,4 +71,5 @@ void ChatListWidget::createChat(const QString& chatName) const
     item->setTextAlignment(Qt::AlignmentFlag::AlignCenter);
     item->setSizeHint(QSize(width(), 70));
     _chatListWidget->addItem(item);
+    _chatListWidget->setCurrentItem(item);
 }

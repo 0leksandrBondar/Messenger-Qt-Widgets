@@ -12,8 +12,11 @@ public:
 
     void connectToServer(const QString& ip, const quint16 port) const;
 
-    void setUserName(const QString& userName) { _userName = userName; }
+    void sendMessage(const QByteArray& data) const;
     void sendMessage(const QString& message, const QString& filePath) const;
+
+    void setUserName(const QString& userName) { _userName = userName; }
+    void setReceiverName(const QString& receiver) { _receiver = receiver; }
 
 signals:
     void messageReceived(const QString& message);
@@ -25,5 +28,6 @@ private:
 
 private:
     QString _userName;
+    QString _receiver;
     QTcpSocket* _socket{ nullptr };
 };
