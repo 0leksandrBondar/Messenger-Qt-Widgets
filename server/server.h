@@ -21,11 +21,13 @@ public:
 private:
     void setupConnections();
 
+    void sendToClient(const QString& receiver, const QByteArray& data) const;
+
     void onNewConnection();
     void onReadyRead();
 
 private:
-    ClientData _client;
+    ClientData* _client;
     QTcpServer* _server{ nullptr };
-    std::vector<ClientData> _clients;
+    std::vector<ClientData*> _clients;
 };

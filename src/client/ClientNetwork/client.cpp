@@ -2,6 +2,8 @@
 
 #include "package/jsonpackage.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QTcpSocket>
 
 Client::Client(QObject* parent) : QObject(parent), _socket{ new QTcpSocket } { setupConnections(); }
@@ -31,8 +33,14 @@ void Client::setupConnections()
     connect(_socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
 }
 
-void Client::onReadyRead() const
+void Client::onReadyRead()
 {
+    qDebug() << "Client::onReadyRead()";
     const QByteArray data = _socket->readAll();
+    const QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QJsonObject json = doc.object();
+
+    const QString text = json["text"].toString();
+    emit messageReceived(text);
     qDebug() << data;
 }

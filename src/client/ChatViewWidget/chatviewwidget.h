@@ -13,6 +13,7 @@ public:
     explicit ChatViewWidget(Client* client, QWidget* parent = nullptr);
 
     void onSendMessage(const QString& message, const QString& filePath) const;
+    void onReceivedMessage(const QString& message) const;
 
 private:
     void setupUi();

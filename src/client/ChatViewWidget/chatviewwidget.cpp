@@ -22,6 +22,11 @@ void ChatViewWidget::onSendMessage(const QString& message, const QString& filePa
     _client->sendMessage(message, filePath);
 }
 
+void ChatViewWidget::onReceivedMessage(const QString& message) const
+{
+    _messageListWidget->addMessage(message, "", false);
+}
+
 void ChatViewWidget::setupUi()
 {
     const auto vLayout = new QVBoxLayout();
@@ -36,4 +41,5 @@ void ChatViewWidget::setupConnections()
 {
     connect(_inputMessageWidget, &InputMessageWidget::sendMessage, this,
             &ChatViewWidget::onSendMessage);
+    connect(_client, &Client::messageReceived, this, &ChatViewWidget::onReceivedMessage);
 }

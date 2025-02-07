@@ -23,7 +23,7 @@ signals:
 private:
     void setupConnections();
 
-    void onReadyRead() const;
+    void onReadyRead();
 
 private:
     QString _userName;
