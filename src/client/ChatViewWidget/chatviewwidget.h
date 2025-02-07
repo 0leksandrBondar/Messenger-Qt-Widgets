@@ -13,6 +13,9 @@ public:
 
     void onSendMessage(const QString& message, const QString& filePath) const;
 
+signals:
+    void sendMessage(const QString& message, const QString& filePath) const;
+
 private:
     void setupUi();
     void setupConnections();

@@ -17,6 +17,7 @@ ChatViewWidget::ChatViewWidget(QWidget* parent)
 void ChatViewWidget::onSendMessage(const QString& message, const QString& filePath) const
 {
     _messageListWidget->addMessage(message, filePath);
+    emit sendMessage(message,filePath);
 }
 
 void ChatViewWidget::setupUi()
