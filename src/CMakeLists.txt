@@ -15,6 +15,9 @@ set(Source
         client/clientwidget.cpp
         client/welcomewidget.cpp
 
+        client/Style/Style.h
+        client/Style/Style.cpp
+
         client/ChatViewWidget/chatviewwidget.h
         client/ChatListWidget/chatlistwidget.h
         client/ChatViewWidget/chatviewwidget.cpp
@@ -48,6 +51,24 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Gui
         Qt6::Network
         Qt6::Widgets)
+
+set_target_properties(${PROJECT_NAME}  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+set(STYLE_FOLDER_PATH ${CMAKE_BINARY_DIR}/bin/Style)
+
+add_custom_command(TARGET ${PROJECT_NAME}  PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLE_FOLDER_PATH}"
+        COMMENT "Creating assets directory"
+)
+
+add_custom_target(copy_styles ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/client/Style/Styles"
+        "${STYLE_FOLDER_PATH}"
+        COMMENT "Copying assets"
+)
+
+add_dependencies(${PROJECT_NAME} copy_styles)
 
 
 

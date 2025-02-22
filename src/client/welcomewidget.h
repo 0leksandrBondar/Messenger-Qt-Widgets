@@ -19,6 +19,10 @@ signals:
 
 private:
     void setupUi();
+
+    void setupDarkTheme() const;
+    void setupLightTheme() const;
+
     void setupConnections();
 
 private:

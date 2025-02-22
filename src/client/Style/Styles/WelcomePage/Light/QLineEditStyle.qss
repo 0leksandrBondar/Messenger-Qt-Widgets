@@ -1,0 +1,17 @@
+QLineEdit
+{
+    padding: 5px;
+    font-size: 22px;
+    border-radius: 10px;
+    border: 2px solid gray;
+}
+
+QLineEdit:hover
+{
+    border: 2px solid blue;
+}
+
+QLineEdit:focus
+{
+    border: 2px solid blue;
+}
