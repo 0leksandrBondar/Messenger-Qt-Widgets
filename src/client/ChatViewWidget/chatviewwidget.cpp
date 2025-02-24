@@ -1,14 +1,12 @@
 #include "chatviewwidget.h"
 
-#include "../ClientNetwork/client.h"
 #include "InputWidget/inputmessagewidget.h"
 #include "MessageListWidget/messagelistwidget.h"
 
 #include <QBoxLayout>
 
-ChatViewWidget::ChatViewWidget(Client* client, QWidget* parent)
+ChatViewWidget::ChatViewWidget(QWidget* parent)
     : QWidget(parent),
-      _client{ client },
       _messageListWidget{ new MessageListWidget() },
       _inputMessageWidget{ new InputMessageWidget() }
 {
@@ -19,7 +17,6 @@ ChatViewWidget::ChatViewWidget(Client* client, QWidget* parent)
 void ChatViewWidget::onSendMessage(const QString& message, const QString& filePath) const
 {
     _messageListWidget->addMessage(message, filePath);
-    _client->sendMessage(message, filePath);
 }
 
 void ChatViewWidget::onReceivedMessage(const QString& message) const
@@ -41,5 +38,4 @@ void ChatViewWidget::setupConnections()
 {
     connect(_inputMessageWidget, &InputMessageWidget::sendMessage, this,
             &ChatViewWidget::onSendMessage);
-    connect(_client, &Client::messageReceived, this, &ChatViewWidget::onReceivedMessage);
 }

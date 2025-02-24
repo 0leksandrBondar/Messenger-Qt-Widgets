@@ -4,7 +4,6 @@
 
 class QSplitter;
 
-class Client;
 class ChatListWidget;
 class ChatViewWidget;
 
@@ -12,7 +11,7 @@ class ClientWidget final : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ClientWidget(Client* client, QWidget* parent = nullptr);
+    explicit ClientWidget(QWidget* parent = nullptr);
 
 private:
     void setupUi();
@@ -21,7 +20,6 @@ private:
     void setupSplitter() const;
 
 private:
-    Client* _client{ nullptr };
     QSplitter* _splitter{ nullptr };
     ChatListWidget* _chatListWidget{ nullptr };
     ChatViewWidget* _chatViewWidget{ nullptr };

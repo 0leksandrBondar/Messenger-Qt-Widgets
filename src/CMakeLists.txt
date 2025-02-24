@@ -10,6 +10,9 @@ set(Source
         mainwindow.h
         mainwindow.cpp
 
+        network/Client.h
+        network/Client.cpp
+
         client/clientwidget.h
         client/welcomewidget.h
         client/clientwidget.cpp
@@ -33,24 +36,18 @@ set(Source
         client/ChatViewWidget/InputWidget/inputmessagewidget.h
         client/ChatViewWidget/InputWidget/inputmessegefield.cpp
         client/ChatViewWidget/InputWidget/inputmessagewidget.cpp
-
-        client/ClientNetwork/client.h
-        client/ClientNetwork/client.cpp
-
-        client/ClientNetwork/package/jsonpackage.h
-        client/ClientNetwork/package/jsonpackage.cpp
 )
 
-find_package(Qt6 COMPONENTS Core Widgets Network Gui REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets  REQUIRED)
 
 
 add_executable(${PROJECT_NAME} ${Source})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Core
-        Qt6::Gui
-        Qt6::Network
-        Qt6::Widgets)
+        Qt6::Widgets
+        Boost::asio
+)
 
 set_target_properties(${PROJECT_NAME}  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 

@@ -1,18 +1,16 @@
 #include "clientwidget.h"
 #include "ChatListWidget/chatlistwidget.h"
 #include "ChatViewWidget/chatviewwidget.h"
-#include "ClientNetwork/client.h"
 
 #include <QLineEdit>
 #include <QSplitter>
 #include <QVBoxLayout>
 
-ClientWidget::ClientWidget(Client* client, QWidget* parent)
+ClientWidget::ClientWidget(QWidget* parent)
     : QWidget(parent),
-      _client{ client },
       _splitter{ new QSplitter() },
-      _chatListWidget{ new ChatListWidget(_client) },
-      _chatViewWidget{ new ChatViewWidget(_client) }
+      _chatListWidget{ new ChatListWidget() },
+      _chatViewWidget{ new ChatViewWidget() }
 {
     setupUi();
     setupConnections();

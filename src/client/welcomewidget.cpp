@@ -1,15 +1,13 @@
 #include "welcomewidget.h"
 
-#include "ClientNetwork/client.h"
 #include "Style/Style.h"
 
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
 
-WelcomeWidget::WelcomeWidget(Client* client, QWidget* parent)
+WelcomeWidget::WelcomeWidget(QWidget* parent)
     : QWidget(parent),
-      _client{ client },
       _loginButton{ new QPushButton(QStringLiteral("Login")) },
       _nameInputLine{ new QLineEdit() }
 {
@@ -21,9 +19,6 @@ void WelcomeWidget::onLoginButtonClicked()
 {
     if (_nameInputLine->text().isEmpty())
         return;
-
-    _client->setUserName(_nameInputLine->text());
-    _client->sendMessage();
 
     emit loginButtonClicked();
 }

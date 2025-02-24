@@ -6,13 +6,11 @@ class QLineEdit;
 class QListWidget;
 class QPushButton;
 
-class Client;
-
 class ChatListWidget final : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ChatListWidget(Client* client, QWidget* parent = nullptr);
+    explicit ChatListWidget(QWidget* parent = nullptr);
 
     void onChatSelectionChanged() const;
     void onAddChatButtonClicked() const;
@@ -25,7 +23,6 @@ private:
     void createChat(const QString& chatName) const;
 
 private:
-    Client* _client{ nullptr };
     QLineEdit* _searchLine{ nullptr };
     QPushButton* _addChatButton{ nullptr };
     QListWidget* _chatListWidget{ nullptr };

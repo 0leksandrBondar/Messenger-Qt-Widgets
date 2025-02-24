@@ -2,7 +2,6 @@
 
 #include <QMainWindow>
 
-class Client;
 class ClientWidget;
 class WelcomeWidget;
 
@@ -19,7 +18,6 @@ private:
     void setupConnections();
 
 private:
-    Client* _client{ nullptr };
     ClientWidget* _clientWidget{ nullptr };
     WelcomeWidget* _welcomeWidget{ nullptr };
 };

@@ -1,14 +1,12 @@
 #include "chatlistwidget.h"
-#include "../ClientNetwork/client.h"
 
 #include <QLineEdit>
 #include <QListWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
 
-ChatListWidget::ChatListWidget(Client* client, QWidget* parent)
+ChatListWidget::ChatListWidget(QWidget* parent)
     : QWidget(parent),
-      _client{ client },
       _searchLine{ new QLineEdit() },
       _addChatButton{ new QPushButton(QStringLiteral("New")) },
       _chatListWidget{ new QListWidget() }
@@ -17,11 +15,7 @@ ChatListWidget::ChatListWidget(Client* client, QWidget* parent)
     setupConnections();
 }
 
-void ChatListWidget::onChatSelectionChanged() const
-{
-    if (const QListWidgetItem* selectedItem = _chatListWidget->currentItem())
-        _client->setReceiverName(selectedItem->text());
-}
+void ChatListWidget::onChatSelectionChanged() const {}
 
 void ChatListWidget::onAddChatButtonClicked() const
 {
