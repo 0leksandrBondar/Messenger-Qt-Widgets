@@ -19,24 +19,30 @@ void Message::composeMessageWidget()
     const auto vLayout = new QVBoxLayout();
     const auto hLayout = new QHBoxLayout();
 
-    auto label = _label->text();
+    auto containerWidget = new QWidget();
+
+    const auto containerLayout = new QVBoxLayout(containerWidget);
 
     if (!_pixmap.isNull())
     {
         _imageLabel->setPixmap(
-            _pixmap.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            _pixmap.scaled(300, 300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         _imageLabel->setAlignment(Qt::AlignCenter);
-        vLayout->addWidget(_imageLabel);
+        containerLayout->addWidget(_imageLabel);
     }
 
     if (!_label->text().isEmpty())
     {
         _label->setWordWrap(true);
-        _label->setStyleSheet(QString("background-color: %1; color: white;"
-                                      "padding: 8px; border-radius: 12px;")
-                                  .arg(_isOwnMessage ? "#0078D4" : "#505050"));
-        vLayout->addWidget(_label);
+        _label->setStyleSheet(
+            "background-color: limegreen;border-radius: 10px; padding: 10px; font: bold 18px Arial; color: black;");
+        _label->setMaximumWidth(300);
+        _label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        containerLayout->addWidget(_label);
     }
+
+    containerWidget->setLayout(containerLayout);
+    vLayout->addWidget(containerWidget);
 
     if (_isOwnMessage)
     {
@@ -49,6 +55,5 @@ void Message::composeMessageWidget()
         hLayout->addStretch();
     }
 
-    hLayout->setContentsMargins(10, 5, 10, 5);
     setLayout(hLayout);
 }

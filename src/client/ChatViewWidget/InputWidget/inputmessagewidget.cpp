@@ -22,6 +22,7 @@ void InputMessageWidget::onSendButtonClicked()
 
     emit sendMessage(_inputMessageField->toPlainText(), _filePath);
     _inputMessageField->clear();
+    _filePath.clear();
 }
 
 void InputMessageWidget::onFileButtonClicked()

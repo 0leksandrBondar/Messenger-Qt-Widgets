@@ -18,4 +18,16 @@ void MessageListWidget::addMessage(const QString& message, const QString& filePa
     scrollToBottom();
 }
 
-void MessageListWidget::setupUi() { setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); }
+void MessageListWidget::setupUi()
+{
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    setSpacing(0);
+    setStyleSheet(
+     "QListWidget::item { outline: none; }"
+     "QListWidget::item:hover { background: transparent; }"
+     "QListWidget::item:selected { background: transparent; color: black; }"
+     "QListWidget:focus { border: none; outline: none; }"
+ );
+
+}
