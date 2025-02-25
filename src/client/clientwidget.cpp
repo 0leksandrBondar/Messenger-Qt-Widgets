@@ -32,6 +32,8 @@ void ClientWidget::setupConnections()
 {
     connect(_splitter, &QSplitter::splitterMoved, _chatListWidget,
             &ChatListWidget::onSplitterResized);
+    connect(_chatListWidget, &ChatListWidget::chatSelectionChanged, _chatViewWidget,
+            &ChatViewWidget::onChatSelectionChanged);
 }
 
 void ClientWidget::setupSplitter() const

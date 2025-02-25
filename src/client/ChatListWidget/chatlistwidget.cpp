@@ -15,7 +15,13 @@ ChatListWidget::ChatListWidget(QWidget* parent)
     setupConnections();
 }
 
-void ChatListWidget::onChatSelectionChanged() const {}
+void ChatListWidget::onChatSelectionChanged()
+{
+    if (auto selectedItem = _chatListWidget->currentItem())
+    {
+        emit chatSelectionChanged(selectedItem->text());
+    }
+}
 
 void ChatListWidget::onAddChatButtonClicked() const
 {

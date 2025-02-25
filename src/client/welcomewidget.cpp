@@ -23,6 +23,8 @@ void WelcomeWidget::onLoginButtonClicked()
     emit loginButtonClicked();
 }
 
+QString WelcomeWidget::getUserName() const { return _nameInputLine->text(); }
+
 void WelcomeWidget::setupUi()
 {
     _nameInputLine->setMinimumHeight(50);

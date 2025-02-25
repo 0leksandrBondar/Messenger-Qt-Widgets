@@ -13,6 +13,8 @@ public:
 
     void onLoginButtonClicked();
 
+    [[nodiscard]] QString getUserName() const;
+
 signals:
     void loginButtonClicked();
 

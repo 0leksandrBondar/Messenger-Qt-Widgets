@@ -26,6 +26,9 @@ set(Source
         client/ChatViewWidget/chatviewwidget.cpp
         client/ChatListWidget/chatlistwidget.cpp
 
+        client/ChatViewWidget/ChatInfoWidget/ChatInfoWidget.h
+        client/ChatViewWidget/ChatInfoWidget/ChatInfoWidget.cpp
+
         client/ChatViewWidget/MessageListWidget/messagelistwidget.h
         client/ChatViewWidget/MessageListWidget/messagelistwidget.cpp
 

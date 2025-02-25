@@ -12,9 +12,12 @@ class ChatListWidget final : public QWidget
 public:
     explicit ChatListWidget(QWidget* parent = nullptr);
 
-    void onChatSelectionChanged() const;
+    void onChatSelectionChanged();
     void onAddChatButtonClicked() const;
     void onSplitterResized(int pos, int index) const;
+
+signals:
+    void chatSelectionChanged(const QString& chatName);
 
 private:
     void setupUi();
