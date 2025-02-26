@@ -41,7 +41,7 @@ set(Source
         client/ChatViewWidget/InputWidget/inputmessagewidget.cpp
 )
 
-find_package(Qt6 COMPONENTS Core Widgets  REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets Multimedia  REQUIRED)
 
 
 add_executable(${PROJECT_NAME} ${Source})
@@ -49,6 +49,7 @@ add_executable(${PROJECT_NAME} ${Source})
 target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Core
         Qt6::Widgets
+        Qt6::Multimedia
         Boost::asio
 )
 

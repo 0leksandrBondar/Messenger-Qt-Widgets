@@ -2,6 +2,7 @@
 
 #include <QWidget>
 
+class QLabel;
 class QLineEdit;
 class QPushButton;
 
@@ -27,6 +28,7 @@ private:
     void setupConnections();
 
 private:
+    QLabel* _welcomeLabel{ nullptr };
     QPushButton* _loginButton{ nullptr };
     QLineEdit* _nameInputLine{ nullptr };
 };

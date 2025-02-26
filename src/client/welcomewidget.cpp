@@ -2,12 +2,14 @@
 
 #include "Style/Style.h"
 
+#include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
 
 WelcomeWidget::WelcomeWidget(QWidget* parent)
     : QWidget(parent),
+      _welcomeLabel(new QLabel()),
       _loginButton{ new QPushButton(QStringLiteral("Login")) },
       _nameInputLine{ new QLineEdit() }
 {
@@ -27,6 +29,10 @@ QString WelcomeWidget::getUserName() const { return _nameInputLine->text(); }
 
 void WelcomeWidget::setupUi()
 {
+    _welcomeLabel->setAlignment(Qt::AlignCenter);
+    _welcomeLabel->setStyleSheet("color: limegreen; font: bold 72px Arial;");
+    _welcomeLabel->setText(QStringLiteral("Welcome to DarkSpace"));
+
     _nameInputLine->setMinimumHeight(50);
     _nameInputLine->setMaximumWidth(500);
     _nameInputLine->setMinimumWidth(200);
@@ -41,11 +47,19 @@ void WelcomeWidget::setupUi()
         setupLightTheme();
 
     const auto layout = new QVBoxLayout();
-    layout->setAlignment(Qt::AlignCenter);
-    layout->setSpacing(20);
+    const auto labelLayout = new QVBoxLayout();
+    const auto inputLayout = new QVBoxLayout();
 
-    layout->addWidget(_nameInputLine);
-    layout->addWidget(_loginButton);
+    labelLayout->addWidget(_welcomeLabel);
+
+    inputLayout->setSpacing(20);
+    inputLayout->addWidget(_nameInputLine);
+    inputLayout->addWidget(_loginButton);
+    inputLayout->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
+    layout->setSpacing(10);
+    layout->addLayout(labelLayout);
+    layout->addLayout(inputLayout);
 
     setLayout(layout);
 }
