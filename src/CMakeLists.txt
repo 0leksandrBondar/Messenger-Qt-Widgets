@@ -44,7 +44,22 @@ set(Source
 find_package(Qt6 COMPONENTS Core Widgets Multimedia  REQUIRED)
 
 
-add_executable(${PROJECT_NAME} ${Source})
+
+set(APP_ICON_PATH ${CMAKE_SOURCE_DIR}/resource/Icon/AppIcon.rc)
+
+add_custom_target(Resource)
+
+add_custom_command(TARGET Resource PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/resource
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/resource
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/resource
+        ${CMAKE_CURRENT_BINARY_DIR}/resource)
+
+set(APP_ICON_PATH ${CMAKE_SOURCE_DIR}/resources/Icon/AppIcon.rc)
+
+
+add_executable(${PROJECT_NAME} ${Source}  ${APP_ICON_PATH})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Core
@@ -52,10 +67,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt6::Multimedia
         Boost::asio
 )
-
-set_target_properties(${PROJECT_NAME}  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-
 set(STYLE_FOLDER_PATH ${CMAKE_BINARY_DIR}/bin/Style)
+set_target_properties(${PROJECT_NAME}  PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 add_custom_command(TARGET ${PROJECT_NAME}  PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLE_FOLDER_PATH}"
